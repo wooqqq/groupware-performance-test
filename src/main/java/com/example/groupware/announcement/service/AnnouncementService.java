@@ -43,6 +43,7 @@ public class AnnouncementService {
         return AnnouncementDetailResponse.from(announcement);
     }
 
+    @Transactional
     public void incrementViewCount(Long id) {
         viewCountService.increment(id);
     }
