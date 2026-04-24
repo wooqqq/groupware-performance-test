@@ -2,7 +2,6 @@ package com.example.groupware.announcement.dto;
 
 import com.example.groupware.announcement.entity.Announcement;
 import com.example.groupware.announcement.entity.AnnouncementType;
-
 import java.io.Serializable;
 import java.time.LocalDateTime;
 

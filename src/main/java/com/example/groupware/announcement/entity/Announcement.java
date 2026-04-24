@@ -34,7 +34,7 @@ public class Announcement {
     private String author;
 
     @Enumerated(EnumType.STRING)
-    @Column(nullable = false, length = 20)
+    @Column(nullable = false, columnDefinition = "VARCHAR(20)")
     private AnnouncementType type;
 
     // Redis 배치 동기화 대상. DB에 직접 UPDATE하지 않음

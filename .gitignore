@@ -45,4 +45,7 @@ bin/
 ### Project ###
 .idea/
 *.log
-.logs/
+*.hprof
+.docs/
+scripts/
+.claude/

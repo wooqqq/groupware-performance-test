@@ -57,7 +57,27 @@ services:
     depends_on:
       - prometheus
 
+  ngrinder-controller:
+    image: ngrinder/controller:3.5.9-p1
+    container_name: groupware-ngrinder-controller
+    ports:
+      - "9001:80"
+      - "16001:16001"
+      - "12000-12009:12000-12009"
+    volumes:
+      - ngrinder-controller-data:/opt/ngrinder-controller
+
+  ngrinder-agent:
+    image: ngrinder/agent:3.5.9-p1
+    container_name: groupware-ngrinder-agent
+    depends_on:
+      - ngrinder-controller
+    command: ngrinder-controller
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+
 volumes:
   mysql-data:
   redis-data:
   grafana-data:
+  ngrinder-controller-data:

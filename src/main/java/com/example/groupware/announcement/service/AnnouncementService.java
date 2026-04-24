@@ -6,6 +6,7 @@ import com.example.groupware.announcement.dto.AnnouncementListResponse;
 import com.example.groupware.announcement.entity.Announcement;
 import com.example.groupware.announcement.entity.AnnouncementType;
 import com.example.groupware.announcement.repository.AnnouncementRepository;
+import com.example.groupware.common.response.RestPage;
 import lombok.RequiredArgsConstructor;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
@@ -37,14 +38,14 @@ public class AnnouncementService {
     // 목록 캐시 TTL 30초: 새 공문 게시 후 최대 30초 내 반영
     @Cacheable(value = "announcement:list", key = "#pageable.pageNumber + '_' + #pageable.pageSize")
     public Page<AnnouncementListResponse> getList(Pageable pageable) {
-        return announcementRepository.findAllByOrderByCreatedAtDesc(pageable)
-                .map(AnnouncementListResponse::from);
+        return new RestPage<>(announcementRepository.findAllByOrderByCreatedAtDesc(pageable)
+                .map(AnnouncementListResponse::from));
     }
 
     @Cacheable(value = "announcement:list", key = "'type_' + #type + '_' + #pageable.pageNumber")
     public Page<AnnouncementListResponse> getListByType(AnnouncementType type, Pageable pageable) {
-        return announcementRepository.findAllByTypeOrderByCreatedAtDesc(type, pageable)
-                .map(AnnouncementListResponse::from);
+        return new RestPage<>(announcementRepository.findAllByTypeOrderByCreatedAtDesc(type, pageable)
+                .map(AnnouncementListResponse::from));
     }
 
     // 상세 캐시 TTL 5분: 인사발령 공문은 게시 후 수정이 거의 없음
