@@ -90,7 +90,8 @@ v2는 DB 커넥션을 거의 사용하지 않고 Redis 캐시로 처리 — 5분
 ## 브랜치 구조
 
 ```
-main              ← v1 baseline (레거시 방식, 캐시 없음)
+main              ← README 통합 관리 (공통 기반)
+v1/baseline       ← v1 레거시 (캐시 없음, 매 요청 DB 직접)
 v2/optimized      ← v2 개선 (Redis 캐싱 + 배치 동기화)
 ```
 
