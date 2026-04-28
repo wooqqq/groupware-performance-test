@@ -33,6 +33,18 @@
 v1은 테스트 중 TPS가 0으로 완전히 떨어지는 구간이 반복됐습니다.  
 v2는 DB 커넥션을 거의 사용하지 않고 Redis 캐시로 처리 — 5분간 조회수 배치 동기화 467K건.
 
+### v1 (레거시) 테스트 결과
+
+| nGrinder | Grafana 응답시간 | Grafana DB 커넥션 |
+|----------|-----------------|------------------|
+| ![v1 nGrinder](pictures/260427_v1_100vuser_ngrinder.png) | ![v1 Grafana 응답시간](pictures/260427_v1_100vuser_grafana_time.png) | ![v1 Grafana DB](pictures/260427_v1_100vuser_grafana_db.png) |
+
+### v2 (개선) 테스트 결과
+
+| nGrinder | Grafana 응답시간 | Grafana DB 커넥션 |
+|----------|-----------------|------------------|
+| ![v2 nGrinder](pictures/260427_v2_100vuser_ngrinder.png) | ![v2 Grafana 응답시간](pictures/260427_v2_100vuser_grafana_time.png) | ![v2 Grafana DB](pictures/260427_v2_vuser_grafana_db.png) |
+
 > **nGrinder "Errors" 수치에 대해**  
 > nGrinder 결과에 Errors가 표시되지만, Grafana 서버 에러율은 0%입니다.  
 > 이 "에러"는 HTTP 5xx 오류가 아니라 TCP 연결 수준의 timeout/refused로, 요청이 Spring Boot에 도달하지 못한 건입니다.  
